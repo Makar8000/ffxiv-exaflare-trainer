@@ -11,6 +11,14 @@ import correctSound from './assets/correct.wav';
 import incorrectSound from './assets/incorrect.wav';
 import { findSafeSpot } from './util/utils';
 
+const Tutorial = (props) => {
+  return <span>
+    <Typography sx={{ height: 57, paddingTop: 1 }} >
+      {"Tap the position of the uptime Exaflare"}
+    </Typography>
+  </span>
+}
+
 const Exaflare = (props) => {
   const style = {
     transform: `rotate(${props.direction * 45}deg)`
@@ -30,7 +38,7 @@ const Exaflare = (props) => {
 }
 
 const ExaflaresContainer = (props) => {
-  const [Icon, setIcon] = useState({ Component: DangerousIcon, color: 'transparent' });
+  const [Icon, setIcon] = useState({ Component: Tutorial, color: 'white' });
   const ref = useRef(null);
   const { width, height } = useContainerDimensions(ref);
   const { ww, wh } = useWindowDimensions();
