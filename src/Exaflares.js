@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { useContainerDimensions } from './util/useContainerDimensions';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import DoneIcon from '@mui/icons-material/Done';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import useSound from 'use-sound';
+import { useContainerDimensions } from './util/useContainerDimensions';
 import exaImg from './assets/exaflare.png';
 import correctSound from './assets/correct.wav';
 import incorrectSound from './assets/incorrect.wav';
 import { findSafeSpot } from './util/utils';
-import { Typography } from '@mui/material';
 
 const Exaflare = (props) => {
   // TODO: fix this garbage
