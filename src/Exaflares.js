@@ -1,5 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useContainerDimensions } from './util/useContainerDimensions';
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import DoneIcon from '@mui/icons-material/Done';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import useSound from 'use-sound';
@@ -34,23 +36,34 @@ const Exaflare = (props) => {
 }
 
 const ExaflaresContainer = (props) => {
+  const [Icon, setIcon] = useState({ Component: DangerousIcon, color: 'transparent' });
   const ref = useRef(null);
   const { width } = useContainerDimensions(ref);
 
   const [playRight] = useSound(correctSound, { volume: props.volume });
   const [playWrong] = useSound(incorrectSound, { volume: props.volume });
+  const onFailure = () => {
+    playWrong();
+    setIcon({ Component: DangerousIcon, color: '#ff3d00' });
+  }
+  const onSuccess = () => {
+    playRight();
+    setIcon({ Component: DoneIcon, color: '#00e676' });
+    props.randomize();
+  }
 
   const exas = props.exaflares;
   const safeSpot = findSafeSpot(exas);
   const onClickSfx = {
-    rear: playWrong,
-    left: playWrong,
-    right: playWrong,
+    rear: onFailure,
+    left: onFailure,
+    right: onFailure,
   }
-  onClickSfx[safeSpot.key] = () => { playRight(); props.randomize(); console.clear() };
+  onClickSfx[safeSpot.key] = onSuccess;
 
   return (
-    <Box ref={ref} style={{ marginTop: '5vh' }} sx={{ flexGrow: 1 }}>
+    <Box ref={ref} sx={{ flexGrow: 1 }
+    }>
       <Grid container
         columnSpacing={2}
         rowSpacing={0}
@@ -59,6 +72,9 @@ const ExaflaresContainer = (props) => {
         alignItems="center"
         style={{ textAlign: "center" }}
       >
+        <Grid item zeroMinWidth xs={12}>
+          <Icon.Component sx={{ color: Icon.color, fontSize: 50 }} />
+        </Grid>
         <Grid item zeroMinWidth xs={12}>
           <Typography>{"Front"}</Typography>
         </Grid>
@@ -75,7 +91,7 @@ const ExaflaresContainer = (props) => {
           <Typography>{"Rear"}</Typography>
         </Grid>
       </Grid>
-    </Box>
+    </Box >
   );
 }
 
