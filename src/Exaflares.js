@@ -21,7 +21,8 @@ const Tutorial = (props) => {
 
 const Exaflare = (props) => {
   const style = {
-    transform: `rotate(${props.direction * 45}deg)`
+    transform: `rotate(${props.direction * 45}deg)`,
+    userSelect: "none",
   };
   if (props.marginTop)
     style.marginTop = props.marginTop;
