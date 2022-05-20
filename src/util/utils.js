@@ -1,13 +1,12 @@
-export const dirMap = {
-  0: "N ",
-  1: "NE",
-  2: "E ",
-  3: "SE",
-  4: "S ",
-  5: "SW",
-  6: "W ",
-  7: "NW",
-}
+/* Directions
+ NW   N   NE
+   \  |  /
+    7 0 1
+W - 6   2 - E
+    5 4 3
+   /  |  \
+  SW  S   SE
+*/
 
 const getDirOffset = offset => {
   return (offset + 8) % 8;
@@ -19,12 +18,9 @@ const randInt = (min, max) => {
 
 const genRandomExa = (loc, dirOverride) => {
   const dir = dirOverride !== undefined ? dirOverride : randInt(0, 7);
-  const dirFriendly = dirMap[dir];
   return {
     dir,
-    dirFriendly,
     loc,
-    locFriendly: dirMap[loc],
     arrows: [getDirOffset(dir - 2), dir, getDirOffset(dir + 2)],
   }
 }
