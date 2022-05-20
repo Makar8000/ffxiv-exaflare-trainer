@@ -17,8 +17,8 @@ const randInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-const genRandomExa = loc => {
-  const dir = randInt(0, 7);
+const genRandomExa = (loc, dirOverride) => {
+  const dir = dirOverride !== undefined ? dirOverride : randInt(0, 7);
   const dirFriendly = dirMap[dir];
   return {
     dir,
@@ -29,7 +29,7 @@ const genRandomExa = loc => {
   }
 }
 
-export const genRandomExas = () => {
+export const genRandomExas = attemptCount => {
   let rear = genRandomExa(4);
 
   let left;
@@ -40,12 +40,20 @@ export const genRandomExas = () => {
   let right;
   let counter = 0;
   do {
-    counter++;
-    if (counter > 200) {
-      console.error("took too long.", { rear, left, right });
-      break;
+    if (counter >= 8) {
+      console.warn("impossible combination", { rear, left, right });
+      if (attemptCount > 10) {
+        console.error("too many impossible combinations. aborting");
+        break;
+      }
+      return genRandomExas(attemptCount ? attemptCount + 1 : 1);
     }
-    right = genRandomExa(1);
+
+    if (right)
+      right = genRandomExa(1, getDirOffset(right.dir + 1));
+    else
+      right = genRandomExa(1);
+    counter++;
   } while (isInvalidRight(rear, left, right))
 
   return { rear, left, right };
@@ -53,15 +61,19 @@ export const genRandomExas = () => {
 
 export const findSafeSpot = exas => {
   const { rear, left, right } = exas;
+  const ret = [];
 
   if (left.arrows.indexOf(3) === -1 && right.arrows.indexOf(5) === -1)
-    return { ...rear, key: "rear" };
+    ret.push({ ...rear, key: "rear" });
 
   if (right.arrows.indexOf(6) === -1 && rear.arrows.indexOf(7) === -1)
-    return { ...left, key: "left" };;
+    ret.push({ ...left, key: "left" });
 
   if (left.arrows.indexOf(2) === -1 && rear.arrows.indexOf(1) === -1)
-    return { ...right, key: "right" };;
+    ret.push({ ...right, key: "right" });
+
+  if (ret.length === 1)
+    return ret.pop();
 
   return undefined;
 }
@@ -85,12 +97,8 @@ const isInvalidLeft = (rear, left) => {
       return true;
   }
 
-  // rear is covering 1; intercard can't face away
+  // rear is covering self; intercard can't face away
   if (rear.arrows.indexOf(7) >= 0 && rear.arrows.indexOf(1) === -1) {
-    if (left.dir % 2 === 1 && left.arrows.indexOf(3) === -1)
-      return true;
-  }
-  if (rear.arrows.indexOf(1) >= 0 && rear.arrows.indexOf(7) === -1) {
     if (left.dir % 2 === 1 && left.arrows.indexOf(3) === -1)
       return true;
   }
@@ -111,38 +119,6 @@ const isInvalidRight = (rear, left, right) => {
       return true;
   }
 
-  // rear is covering both; rear must be open
-  if (rear.arrows.indexOf(7) >= 0 && rear.arrows.indexOf(1) >= 0) {
-    if (right.arrows.indexOf(5) >= 0)
-      return true;
-  }
-
-  // rear is cardinal; intercard must cover rear
-  if (rear.dir % 2 === 0 && right.dir % 2 === 1) {
-    if (right.arrows.indexOf(5) === -1)
-      return true;
-  }
-
-  // rear is cardinal; card must cover left
-  if (rear.dir % 2 === 0 && right.dir % 2 === 0) {
-    if (right.arrows.indexOf(6) === -1)
-      return true;
-  }
-
-  // rear is covering 1; intercard can't face away
-  if (rear.arrows.indexOf(1) >= 0 && rear.arrows.indexOf(7) === -1) {
-    if (right.dir % 2 === 1 && right.arrows.indexOf(5) === -1)
-      return true;
-  }
-  if (rear.arrows.indexOf(7) >= 0 && rear.arrows.indexOf(1) === -1) {
-    if (right.dir % 2 === 1 && right.arrows.indexOf(5) === -1)
-      return true;
-  }
-
   // safe spot must exist
   return findSafeSpot({ right, left, rear }) === undefined;
-}
-
-export const prettyPrint = (exas) => {
-  return `${dirMap[exas.left.dir]}  ${dirMap[exas.right.dir]}\n  ${dirMap[exas.rear.dir]}`
 }
