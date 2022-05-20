@@ -7,6 +7,7 @@ import exaImg from './assets/exaflare.png';
 import correctSound from './assets/correct.wav';
 import incorrectSound from './assets/incorrect.wav';
 import { findSafeSpot } from './util/utils';
+import { Typography } from '@mui/material';
 
 const Exaflare = (props) => {
   // TODO: fix this garbage
@@ -48,9 +49,8 @@ const ExaflaresContainer = (props) => {
   }
   onClickSfx[safeSpot.key] = () => { playRight(); props.randomize(); console.clear() };
 
-  console.log("Safe spot: " + safeSpot.key);
   return (
-    <Box ref={ref} style={{ marginTop: '7vh' }} sx={{ flexGrow: 1 }}>
+    <Box ref={ref} style={{ marginTop: '5vh' }} sx={{ flexGrow: 1 }}>
       <Grid container
         columnSpacing={2}
         rowSpacing={0}
@@ -59,6 +59,9 @@ const ExaflaresContainer = (props) => {
         alignItems="center"
         style={{ textAlign: "center" }}
       >
+        <Grid item zeroMinWidth xs={12}>
+          <Typography>{"Front"}</Typography>
+        </Grid>
         <Grid item zeroMinWidth xs={6}>
           <Exaflare onClick={onClickSfx.left} direction={exas.left.dir} width={width} />
         </Grid>
@@ -67,6 +70,9 @@ const ExaflaresContainer = (props) => {
         </Grid>
         <Grid item zeroMinWidth xs={12}>
           <Exaflare onClick={onClickSfx.rear} direction={exas.rear.dir} width={width} marginTop={-20} />
+        </Grid>
+        <Grid item zeroMinWidth xs={12}>
+          <Typography>{"Rear"}</Typography>
         </Grid>
       </Grid>
     </Box>
