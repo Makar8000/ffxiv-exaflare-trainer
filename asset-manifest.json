@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/ffxiv-exaflare-trainer/static/js/main.06c04dc8.js",
-    "static/js/845.71a59b0e.chunk.js": "/ffxiv-exaflare-trainer/static/js/845.71a59b0e.chunk.js",
+    "main.js": "/ffxiv-exaflare-trainer/static/js/main.051e19f3.js",
+    "static/js/845.50302220.chunk.js": "/ffxiv-exaflare-trainer/static/js/845.50302220.chunk.js",
     "static/media/exaflare.png": "/ffxiv-exaflare-trainer/static/media/exaflare.b48972f1b23ab9e2d894.png",
     "static/media/correct.wav": "/ffxiv-exaflare-trainer/static/media/correct.7a746e5a6746454c8485.wav",
     "static/media/incorrect.wav": "/ffxiv-exaflare-trainer/static/media/incorrect.1611e0ba11cc7c983607.wav",
     "index.html": "/ffxiv-exaflare-trainer/index.html",
-    "main.06c04dc8.js.map": "/ffxiv-exaflare-trainer/static/js/main.06c04dc8.js.map",
-    "845.71a59b0e.chunk.js.map": "/ffxiv-exaflare-trainer/static/js/845.71a59b0e.chunk.js.map"
+    "main.051e19f3.js.map": "/ffxiv-exaflare-trainer/static/js/main.051e19f3.js.map",
+    "845.50302220.chunk.js.map": "/ffxiv-exaflare-trainer/static/js/845.50302220.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.06c04dc8.js"
+    "static/js/main.051e19f3.js"
   ]
 }
