@@ -100,7 +100,6 @@ const isInvalidLeft = (rear, left) => {
 
 const isInvalidRight = (rear, left, right) => {
   // rear is cardinal; exactly 1 other card must exist
-  const debug = { rear, left, right };
   if (rear.dir % 2 === 0) {
     if (left.dir % 2 === right.dir % 2)
       return true;
