@@ -16,6 +16,7 @@ export default function App() {
     if (Number.isNaN(newVol)) {
       setError(true);
     } else {
+      setError(false);
       setVolume(newVol / 100);
     }
   }
