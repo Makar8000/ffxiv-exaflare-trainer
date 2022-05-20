@@ -1,45 +1,41 @@
 import React, { useState } from 'react';
 import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
+import Stack from '@mui/material/Stack';
+import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
+import VolumeDown from '@mui/icons-material/VolumeDown';
+import VolumeUp from '@mui/icons-material/VolumeUp';
 import Exaflares from './Exaflares';
 import { genRandomExas } from './util/utils';
 
 export default function App() {
   const [exaflares, setExas] = useState(genRandomExas());
   const [volume, setVolume] = useState(0.50);
-  const [isError, setError] = useState(false);
-
-  const onVolumeChange = (vol) => {
-    const newVol = Number.parseInt(vol);
-    if (Number.isNaN(newVol)) {
-      setError(true);
-    } else {
-      setError(false);
-      setVolume(newVol / 100);
-    }
-  }
 
   return (
     <Container maxWidth="md">
-      <div style={{ margin: 15, textAlign: "center" }}>
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 10,
+        marginBottom: 5,
+        textAlign: "center"
+      }}>
         <Button
           variant="outlined"
-          style={{ height: 40, marginRight: 10 }}
+          style={{ marginRight: 15, }}
           onClick={() => setExas(genRandomExas())}>
           {"Randomize"}
         </Button>
-        <TextField
-          error={isError}
-          style={{ width: 90 }}
-          onChange={(e) => { onVolumeChange(e.target.value) }}
-          InputProps={{
-            endAdornment: <InputAdornment position="end">{"%"}</InputAdornment>,
-          }}
-          label="Volume"
-          defaultValue={50} size="small"
-        />
+        <Stack width={200} spacing={2} direction="row" alignItems="center">
+          <VolumeDown onClick={() => { setVolume(0) }} />
+          <Slider aria-label="Volume"
+            value={Math.round(volume * 100)}
+            onChange={(e) => { setVolume(Number.parseInt(e.target.value) / 100) }}
+          />
+          <VolumeUp onClick={() => { setVolume(1) }} />
+        </Stack>
       </div>
       <Exaflares exaflares={exaflares} randomize={() => setExas(genRandomExas())} volume={volume} />
     </Container>
