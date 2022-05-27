@@ -45,7 +45,7 @@ const ExaflaresContainer = (props) => {
   const { ww, wh } = useWindowDimensions();
 
   const [playRight] = useSound(correctSound, { volume: props.volume });
-  const [playWrong] = useSound(incorrectSound, { volume: props.volume * 0.6 });
+  const [playWrong] = useSound(incorrectSound, { volume: props.volume * 0.5 });
   const onFailure = () => {
     playWrong();
     setIcon({ Component: DangerousIcon, color: '#ff3d00' });
