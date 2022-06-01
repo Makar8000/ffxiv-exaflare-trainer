@@ -59,14 +59,29 @@ export const findSafeSpot = exas => {
   const { rear, left, right } = exas;
   const ret = [];
 
+  const safeShift = { left: true, right: true, middle: true, };
+  if (left.arrows.indexOf(3) !== -1) {
+    delete safeShift.middle;
+    delete safeShift.right;
+  }
+  if (right.arrows.indexOf(5) !== -1) {
+    delete safeShift.middle;
+    delete safeShift.left;
+  }
+  if (right.arrows.indexOf(4) !== -1)
+    delete safeShift.right;
+  if (left.arrows.indexOf(4) !== -1)
+    delete safeShift.left;
+  const shift = Object.keys(safeShift).pop();
+
   if (left.arrows.indexOf(3) === -1 && right.arrows.indexOf(5) === -1)
-    ret.push({ ...rear, key: "rear" });
+    ret.push({ ...rear, shift, key: "rear" });
 
   if (right.arrows.indexOf(6) === -1 && rear.arrows.indexOf(7) === -1)
-    ret.push({ ...left, key: "left" });
+    ret.push({ ...left, shift, key: "left" });
 
   if (left.arrows.indexOf(2) === -1 && rear.arrows.indexOf(1) === -1)
-    ret.push({ ...right, key: "right" });
+    ret.push({ ...right, shift, key: "right" });
 
   if (ret.length === 1)
     return ret.pop();

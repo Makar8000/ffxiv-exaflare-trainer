@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import DoneIcon from '@mui/icons-material/Done';
+import UndoIcon from '@mui/icons-material/Undo';
+import RedoIcon from '@mui/icons-material/Redo';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -62,8 +64,12 @@ const ExaflaresContainer = (props) => {
     rear: onFailure,
     left: onFailure,
     right: onFailure,
+    shiftmiddle: onFailure,
+    shiftleft: onFailure,
+    shiftright: onFailure,
   }
   onClickSfx[safeSpot.key] = onSuccess;
+  onClickSfx[`shift${safeSpot?.shift}`] = onSuccess;
 
   // TODO: fix this garbage
   let mh = Math.min(350, Math.floor(350 * (Math.min(752, (752 / 797.562) * (wh - 70) / 752))));
@@ -89,14 +95,24 @@ const ExaflaresContainer = (props) => {
         <Grid item zeroMinWidth xs={12}>
           <Typography>{"Front"}</Typography>
         </Grid>
-        <Grid item zeroMinWidth xs={6}>
-          <Exaflare onClick={onClickSfx.left} direction={exas.left.dir} width={w} />
+        <Grid item zeroMinWidth xs={6} onClick={onClickSfx.left}>
+          <Exaflare direction={exas.left.dir} width={w} />
         </Grid>
-        <Grid item zeroMinWidth xs={6}>
-          <Exaflare onClick={onClickSfx.right} direction={exas.right.dir} width={w} />
+        <Grid item zeroMinWidth xs={6} onClick={onClickSfx.right}>
+          <Exaflare direction={exas.right.dir} width={w} />
         </Grid>
-        <Grid item zeroMinWidth xs={12}>
-          <Exaflare onClick={onClickSfx.rear} direction={exas.rear.dir} width={w} marginTop={-20} />
+        <Grid item zeroMinWidth xs={3} onClick={onClickSfx.shiftleft}>
+          <div style={{ height: w, paddingTop: w / 3 - 10 }}>
+            <RedoIcon sx={{ fontSize: w / 3, transform: 'rotate(220deg) translate(-45%)' }} />
+          </div>
+        </Grid>
+        <Grid item zeroMinWidth xs={6} onClick={onClickSfx.rear}>
+          <Exaflare direction={exas.rear.dir} width={w} marginTop={-20} />
+        </Grid>
+        <Grid item zeroMinWidth xs={3} onClick={onClickSfx.shiftright}>
+          <div style={{ height: w, paddingTop: w / 3 - 10 }}>
+            <UndoIcon sx={{ fontSize: w / 3, transform: 'rotate(-220deg) translate(45%)' }} />
+          </div>
         </Grid>
         <Grid item zeroMinWidth xs={12}>
           <Typography>{"Rear"}</Typography>
