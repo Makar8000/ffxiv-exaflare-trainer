@@ -16,13 +16,14 @@ import { findSafeSpot } from './util/utils';
 const Tutorial = (props) => {
   return <span>
     <Typography sx={{ height: 57, paddingTop: 1 }} >
-      {"Tap the position of the uptime Exaflare"}
+      {"Tap the position of the uptime Exaflare or slide direction"}
     </Typography>
   </span>
 }
 
 const Exaflare = (props) => {
   const style = {
+    borderRadius: '50%',
     transform: `rotate(${props.direction * 45}deg)`,
     userSelect: "none",
   };
@@ -95,23 +96,23 @@ const ExaflaresContainer = (props) => {
         <Grid item zeroMinWidth xs={12}>
           <Typography>{"Front"}</Typography>
         </Grid>
-        <Grid item zeroMinWidth xs={6} onClick={onClickSfx.left}>
-          <Exaflare direction={exas.left.dir} width={w} />
+        <Grid item zeroMinWidth xs={6}>
+          <Exaflare onClick={onClickSfx.left} direction={exas.left.dir} width={w} />
         </Grid>
-        <Grid item zeroMinWidth xs={6} onClick={onClickSfx.right}>
-          <Exaflare direction={exas.right.dir} width={w} />
+        <Grid item zeroMinWidth xs={6}>
+          <Exaflare onClick={onClickSfx.right} direction={exas.right.dir} width={w} />
         </Grid>
         <Grid item zeroMinWidth xs={3} onClick={onClickSfx.shiftleft}>
           <div style={{ height: w, paddingTop: w / 3 - 10 }}>
-            <RedoIcon sx={{ fontSize: w / 3, transform: 'rotate(220deg) translate(-45%)' }} />
+            <RedoIcon sx={{ fontSize: w / 3, transform: 'rotate(220deg) translate(-50%)' }} />
           </div>
         </Grid>
-        <Grid item zeroMinWidth xs={6} onClick={onClickSfx.rear}>
-          <Exaflare direction={exas.rear.dir} width={w} marginTop={-20} />
+        <Grid item zeroMinWidth xs={6}>
+          <Exaflare onClick={onClickSfx.rear} direction={exas.rear.dir} width={w} marginTop={-20} />
         </Grid>
         <Grid item zeroMinWidth xs={3} onClick={onClickSfx.shiftright}>
           <div style={{ height: w, paddingTop: w / 3 - 10 }}>
-            <UndoIcon sx={{ fontSize: w / 3, transform: 'rotate(-220deg) translate(45%)' }} />
+            <UndoIcon sx={{ fontSize: w / 3, transform: 'rotate(-220deg) translate(50%)'}} />
           </div>
         </Grid>
         <Grid item zeroMinWidth xs={12}>
