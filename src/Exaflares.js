@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook'
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import DoneIcon from '@mui/icons-material/Done';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -71,6 +72,11 @@ const ExaflaresContainer = (props) => {
   }
   onClickSfx[safeSpot.key] = onSuccess;
   onClickSfx[`shift${safeSpot?.shift}`] = onSuccess;
+  useHotkeys('a', onClickSfx.shiftleft, {}, [onClickSfx.shiftleft]);
+  useHotkeys('s', onClickSfx.rear, {}, [onClickSfx.rear]);
+  useHotkeys('d', onClickSfx.shiftright, {}, [onClickSfx.shiftright]);
+  useHotkeys('q', onClickSfx.left, {}, [onClickSfx.left]);
+  useHotkeys('e', onClickSfx.right, {}, [onClickSfx.right]);
 
   // TODO: fix this garbage
   let mh = Math.min(350, Math.floor(350 * (Math.min(752, (752 / 797.562) * (wh - 70) / 752))));
@@ -112,7 +118,7 @@ const ExaflaresContainer = (props) => {
         </Grid>
         <Grid item zeroMinWidth xs={3} onClick={onClickSfx.shiftright}>
           <div style={{ height: w, paddingTop: w / 3 - 10 }}>
-            <UndoIcon sx={{ fontSize: w / 3, transform: 'rotate(-220deg) translate(50%)'}} />
+            <UndoIcon sx={{ fontSize: w / 3, transform: 'rotate(-220deg) translate(50%)' }} />
           </div>
         </Grid>
         <Grid item zeroMinWidth xs={12}>

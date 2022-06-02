@@ -10,7 +10,7 @@ import { genRandomExas } from './util/utils';
 
 export default function App() {
   const [exaflares, setExas] = useState(genRandomExas());
-  const [volume, setVolume] = useState(0.50);
+  const [volume, setVolume] = useState(0.40);
 
   return (
     <Container maxWidth="md">
