@@ -70,7 +70,7 @@ const ExaflaresContainer = (props) => {
     shiftleft: onFailure,
     shiftright: onFailure,
   }
-  onClickSfx[safeSpot.key] = onSuccess;
+  onClickSfx[safeSpot?.key] = onSuccess;
   onClickSfx[`shift${safeSpot?.shift}`] = onSuccess;
   useHotkeys('a', onClickSfx.shiftleft, {}, [onClickSfx.shiftleft]);
   useHotkeys('s', onClickSfx.rear, {}, [onClickSfx.rear]);
