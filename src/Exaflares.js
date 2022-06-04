@@ -14,10 +14,9 @@ import { findSafeSpot } from './util/utils';
 
 const ExaflaresContainer = (props) => {
   const [Icon, setIcon] = useState({ Component: DoneIcon, color: 'transparent' });
-  const ref = useRef(null);
-
   const [playRight] = useSound(correctSound, { volume: props.volume });
   const [playWrong] = useSound(incorrectSound, { volume: props.volume * 0.5 });
+
   const onFailure = () => {
     playWrong();
     setIcon({ Component: DangerousIcon, color: '#ff3d00' });
@@ -39,6 +38,7 @@ const ExaflaresContainer = (props) => {
   }
   onClickSfx[safeSpot?.key] = onSuccess;
   onClickSfx[`shift${safeSpot?.shift}`] = onSuccess;
+
   useHotkeys('a', onClickSfx.shiftleft, {}, [onClickSfx.shiftleft]);
   useHotkeys('s', onClickSfx.rear, {}, [onClickSfx.rear]);
   useHotkeys('d', onClickSfx.shiftright, {}, [onClickSfx.shiftright]);
@@ -49,7 +49,7 @@ const ExaflaresContainer = (props) => {
   const pad = 0.02 * base;
   const exaSize = (base / 2) - pad;
   return (
-    <Box ref={ref} sx={{ flex: 1, marginTop: 2 }}>
+    <Box sx={{ flex: 1, marginTop: 2 }}>
       <Grid
         container
         rowSpacing={1}
@@ -83,8 +83,8 @@ const ExaflaresContainer = (props) => {
               <g fill="white" transform="matrix(0 -1.4732 1.4731 0 -24.025 1460.4)">
                 <g fill="white" transform="matrix(0 -.89120 .89120 0 352.6 899.59)">
                   <path
-                    d="m109.91 36.812c-62.548 14.439-109.29 70.188-109.91 136.97h48.406c0.56121-39.834 26.012-73.619 61.5-86.562v-50.406z"
                     fill="white"
+                    d="m109.91 36.812c-62.548 14.439-109.29 70.188-109.91 136.97h48.406c0.56121-39.834 26.012-73.619 61.5-86.562v-50.406z"
                     transform="matrix(0 1.1221 -1.1221 0 541.51 266.67)"
                   />
                   <path fill="white" d="m401.86 384.46 68.34 77.194 71.312-77.315" />
