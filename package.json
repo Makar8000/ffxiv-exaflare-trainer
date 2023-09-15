@@ -4,34 +4,23 @@
   "homepage": "https://makar8000.github.io/ffxiv-exaflare-trainer",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.10.16",
-    "@mui/material": "^5.10.17",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hotkeys-hook": "^4.0.6",
+    "react-hotkeys-hook": "^4.4.1",
     "react-scripts": "5.0.1",
-    "use-sound": "^4.0.1",
-    "web-vitals": "^3.1.0"
+    "use-sound": "^4.0.1"
   },
   "scripts": {
-    "preinstall": "npm install --package-lock-only --ignore-scripts --no-audit && npx npm-force-resolutions",
+    "preinstall": "npm install --package-lock-only --ignore-scripts --no-audit && npx force-resolutions@latest",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -46,7 +35,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "gh-pages": "^6.0.0"
   },
   "resolutions": {
     "loader-utils": "2.0.4",

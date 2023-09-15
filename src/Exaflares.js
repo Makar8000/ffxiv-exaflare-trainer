@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook'
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import DoneIcon from '@mui/icons-material/Done';
